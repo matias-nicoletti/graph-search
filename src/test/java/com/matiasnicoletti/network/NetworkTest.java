@@ -34,23 +34,24 @@ public class NetworkTest {
 	}
 
 	@Test
-	public void testConnectOK() {
+	public void testConnectBidireccional() {
 		Network network = new Network(DEFAULT_NUMBER_OF_NODES);
-		assertTrue(network.getNumberOfNodes() == DEFAULT_NUMBER_OF_NODES);
-		assertTrue(network.getNumberOfEdges() == 0);
 
+		// test if a connect really links origin and destination
 		network.connect(1, 2);
-		network.connect(6, 2);
-		network.connect(2, 4);
-		network.connect(5, 8);
+		assertTrue(network.query(1, 2));
+		assertTrue(network.query(2, 1));
+		assertFalse(network.query(3, 4));
 
-		assertTrue(network.getNumberOfNodes() == DEFAULT_NUMBER_OF_NODES);
-		assertTrue(network.getNumberOfEdges() == 4);
+		network.connect(5, 8);
+		assertTrue(network.query(5, 8));
+		assertTrue(network.query(8, 5));
+		assertFalse(network.query(7, 4));
 
 	}
 
 	@Test
-	public void testQuery1() {
+	public void testQueryExampleNetwork() {
 		Network network = new Network(DEFAULT_NUMBER_OF_NODES);
 		// example network
 		network.connect(1, 2);
@@ -72,7 +73,7 @@ public class NetworkTest {
 	}
 
 	@Test
-	public void testQuery2() {
+	public void testQueryFullyConnectedNetwork() {
 		Network network = new Network(DEFAULT_NUMBER_OF_NODES);
 		// fully connected network
 		network.connect(1, 2);

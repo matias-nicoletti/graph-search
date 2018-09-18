@@ -94,12 +94,4 @@ public class Network {
 		}
 	}
 
-	public Integer getNumberOfEdges() {
-		return numberOfEdges;
-	}
-
-	public Integer getNumberOfNodes() {
-		return adjacencyList.size();
-	}
-
 }
